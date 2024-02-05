@@ -1,0 +1,62 @@
+
+title ShikhshaNadi System Architecture
+
+// Define groups and nodes
+Authentication {
+  LoginPage [icon: page]
+  AuthServer [icon: aws-cognito]
+}
+User Interface {
+  StreamlitApp [icon: monitor]
+  FileUploader [icon: upload-cloud]
+  SpeechRecognition [icon: mic]
+  Translator [icon: globe]
+}
+Processing {
+  DocumentProcessor [icon: file-text]
+  ChatGoogleGenerativeAI [icon: message-square]
+  AdvancedRAGTechniques [icon: search]
+  SentenceWindowEngine [icon: database]
+}
+Services {
+  AdminService [icon: gcp-functions]
+  UserService [icon: azure-function-app]
+}
+Database {
+  DB [icon: database]
+}
+User [icon: user]
+
+// Define connections where none are between a parent group and its own child node
+User > LoginPage
+LoginPage > AuthServer
+AuthServer > DB
+DB > AuthServer
+AuthServer > LoginPage
+LoginPage > StreamlitApp
+StreamlitApp > User
+User > FileUploader
+StreamlitApp > DocumentProcessor
+DocumentProcessor > ChatGoogleGenerativeAI
+DocumentProcessor > AdvancedRAGTechniques
+User > StreamlitApp
+StreamlitApp > SpeechRecognition
+SpeechRecognition > Translator
+Translator > SentenceWindowEngine
+User > Translator
+Translator > SentenceWindowEngine
+SentenceWindowEngine > Translator
+Translator > StreamlitApp
+StreamlitApp > User
+User > StreamlitApp
+StreamlitApp > AdminService
+AdminService > DB
+DB > AdminService
+AdminService > StreamlitApp
+StreamlitApp > User
+User > StreamlitApp
+StreamlitApp > UserService
+UserService > DB
+DB > UserService
+UserService > StreamlitApp
+StreamlitApp > User
